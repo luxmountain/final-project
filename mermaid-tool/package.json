@@ -1,0 +1,14 @@
+{
+  "name": "mermaid-tool",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "node render.js"
+  },
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.0",
+    "puppeteer": "^24.0.0"
+  },
+  "packageManager": "yarn@4.6.0"
+}
