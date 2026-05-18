@@ -1,0 +1,81 @@
+import type { Event, Merchandise } from "@repo/types";
+
+export const mockEvents: Event[] = [
+  {
+    id: "1",
+    title: "Đêm nhạc Sơn Tùng M-TP: Sky Tour 2026",
+    description: "Đêm nhạc live hoành tráng nhất năm với hàng loạt bản hit đình đám.",
+    bannerUrl: "https://placehold.co/800x400/2563eb/white?text=Sky+Tour+2026",
+    startDate: "2026-06-15T19:00:00",
+    endDate: "2026-06-15T23:00:00",
+    venue: "Sân vận động Mỹ Đình",
+    city: "Hà Nội",
+    category: "Ca nhạc",
+    organizer: "Sky Entertainment",
+    ticketClasses: [
+      { id: "tc1", name: "VIP", price: 3000000, quota: 200, sold: 150 },
+      { id: "tc2", name: "Standard", price: 1500000, quota: 5000, sold: 3200 },
+      { id: "tc3", name: "General", price: 800000, quota: 10000, sold: 7500 },
+    ],
+    status: "approved",
+  },
+  {
+    id: "2",
+    title: "Festival Âm nhạc Quốc tế Hội An 2026",
+    description: "Lễ hội âm nhạc quốc tế quy tụ nghệ sĩ từ 20 quốc gia.",
+    bannerUrl: "https://placehold.co/800x400/7c3aed/white?text=Hoi+An+Festival",
+    startDate: "2026-07-20T17:00:00",
+    endDate: "2026-07-22T23:00:00",
+    venue: "Phố cổ Hội An",
+    city: "Quảng Nam",
+    category: "Festival",
+    organizer: "Vietnam Music Corp",
+    ticketClasses: [
+      { id: "tc4", name: "VIP 3 ngày", price: 5000000, quota: 100, sold: 80 },
+      { id: "tc5", name: "Standard 3 ngày", price: 2500000, quota: 2000, sold: 1200 },
+      { id: "tc6", name: "1 ngày", price: 1000000, quota: 5000, sold: 3000 },
+    ],
+    status: "approved",
+  },
+  {
+    id: "3",
+    title: "Stand-up Comedy: Trấn Thành Live",
+    description: "Đêm hài kịch đặc biệt với Trấn Thành và các nghệ sĩ khách mời.",
+    bannerUrl: "https://placehold.co/800x400/16a34a/white?text=Comedy+Night",
+    startDate: "2026-05-30T20:00:00",
+    endDate: "2026-05-30T22:30:00",
+    venue: "Nhà hát Bến Thành",
+    city: "TP. Hồ Chí Minh",
+    category: "Hài kịch",
+    organizer: "Laugh Factory VN",
+    ticketClasses: [
+      { id: "tc7", name: "VIP", price: 2000000, quota: 50, sold: 50 },
+      { id: "tc8", name: "Standard", price: 800000, quota: 300, sold: 250 },
+    ],
+    status: "approved",
+  },
+  {
+    id: "4",
+    title: "EDM Party: Alan Walker Vietnam Tour",
+    description: "DJ Alan Walker lần đầu biểu diễn tại Việt Nam.",
+    bannerUrl: "https://placehold.co/800x400/dc2626/white?text=Alan+Walker",
+    startDate: "2026-08-10T21:00:00",
+    endDate: "2026-08-11T02:00:00",
+    venue: "Trung tâm Hội nghị Quốc gia",
+    city: "Hà Nội",
+    category: "EDM",
+    organizer: "Beat Productions",
+    ticketClasses: [
+      { id: "tc9", name: "VVIP", price: 5000000, quota: 50, sold: 30 },
+      { id: "tc10", name: "VIP", price: 3000000, quota: 500, sold: 200 },
+      { id: "tc11", name: "GA", price: 1200000, quota: 8000, sold: 4000 },
+    ],
+    status: "approved",
+  },
+];
+
+export const mockMerchandise: Merchandise[] = [
+  { id: "m1", name: "Áo thun Sky Tour", imageUrl: "https://placehold.co/200x200/2563eb/white?text=Ao", price: 350000, stock: 500, eventId: "1" },
+  { id: "m2", name: "Lightstick Official", imageUrl: "https://placehold.co/200x200/7c3aed/white?text=Light", price: 500000, stock: 200, eventId: "1" },
+  { id: "m3", name: "Poster Limited", imageUrl: "https://placehold.co/200x200/16a34a/white?text=Poster", price: 150000, stock: 1000, eventId: "1" },
+];

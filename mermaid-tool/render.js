@@ -10,9 +10,15 @@ const outputDir = join(__dirname, "output");
 mkdirSync(outputDir, { recursive: true });
 
 const content = readFileSync(inputFile, "utf-8");
-
-// Match all mermaid blocks, determine type from heading context
 const sections = content.split(/^## /m).filter(Boolean);
+
+// Config cho output đẹp hơn khi in docs
+const CONFIG = {
+  width: 4096,       // width lớn hơn → ảnh nét hơn khi scale down trong docs
+  scale: 3,          // scale factor cao → text rõ ràng
+  backgroundColor: "white",
+  theme: "default",  // default theme dễ đọc hơn neutral
+};
 
 let count = 0;
 for (const section of sections) {
@@ -23,7 +29,8 @@ for (const section of sections) {
   if (!ucMatch) continue;
 
   const ucNum = ucMatch[1];
-  const isSequence = section.toLowerCase().includes("sequence");
+  const headerLine = section.split('\n')[0];
+  const isSequence = headerLine.toLowerCase().includes("sequence");
   const type = isSequence ? "sequence" : "activity";
   const ucId = `UC-${ucNum}`;
 
@@ -36,10 +43,10 @@ for (const section of sections) {
   console.log(`[${count}] Rendering ${ucId} (${type})...`);
 
   try {
-    execSync(`npx mmdc -i "${mmdFile}" -o "${pngFile}" -t neutral -b white -w 2048`, {
-      cwd: __dirname,
-      stdio: "inherit",
-    });
+    execSync(
+      `npx mmdc -i "${mmdFile}" -o "${pngFile}" -t ${CONFIG.theme} -b ${CONFIG.backgroundColor} -w ${CONFIG.width} -s ${CONFIG.scale}`,
+      { cwd: __dirname, stdio: "inherit" }
+    );
     console.log(`  ✓ ${ucId}_${type}.png`);
   } catch (e) {
     console.error(`  ✗ Failed: ${ucId}_${type}`);
@@ -47,3 +54,4 @@ for (const section of sections) {
 }
 
 console.log(`\nDone! ${count} diagrams rendered to: ${outputDir}`);
+console.log(`\nTip: Ảnh xuất ra ${CONFIG.width}px width, scale ${CONFIG.scale}x → rõ nét khi chèn vào Google Docs/Word.`);
