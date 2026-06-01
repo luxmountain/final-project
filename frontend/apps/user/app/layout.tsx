@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Search, Ticket, ShoppingCart, User } from "lucide-react";
+import { Orbitron } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "./components/bottom-nav";
 
+const brandFont = Orbitron({ subsets: ["latin"], weight: ["700"] });
+
 export const metadata: Metadata = {
-  title: "GreenPlate - Vé sự kiện",
+  title: "VENTIX - Vé sự kiện",
   description: "Nền tảng phân phối vé và vật phẩm sự kiện",
 };
 
@@ -13,8 +16,8 @@ function DesktopHeader() {
   return (
     <header className="sticky top-0 z-50 hidden border-b border-green-700 bg-green-600 shadow-md md:block">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-6">
-        <Link href="/" className="text-xl font-bold text-white">
-          🎫 GreenPlate
+        <Link href="/" className={`text-xl font-bold tracking-wide text-white ${brandFont.className}`}>
+          VENTIX
         </Link>
 
         <div className="relative flex-1 max-w-xl">

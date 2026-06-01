@@ -1,8 +1,20 @@
 import Link from "next/link";
-import { Search, TrendingUp, Flame, ChevronRight } from "lucide-react";
+import { Search, TrendingUp, Flame, ChevronRight, Music, Tent, Laugh, Headphones, Trophy, Palette, Briefcase, Drama, type LucideIcon } from "lucide-react";
 import { mockEvents, categories } from "./lib/mock-data";
+
+const categoryIcons: Record<string, { icon: LucideIcon; color: string }> = {
+  music: { icon: Music, color: "text-pink-400" },
+  festival: { icon: Tent, color: "text-purple-400" },
+  comedy: { icon: Laugh, color: "text-yellow-400" },
+  edm: { icon: Headphones, color: "text-blue-400" },
+  sports: { icon: Trophy, color: "text-green-400" },
+  art: { icon: Palette, color: "text-orange-400" },
+  conference: { icon: Briefcase, color: "text-slate-400" },
+  theater: { icon: Drama, color: "text-red-400" },
+};
 import { EventCard } from "./components/event-card";
 import { HeroBanner } from "./components/hero-banner";
+import { TrendingCarousel } from "./components/trending-carousel";
 
 export default function HomePage() {
   const trending = mockEvents.filter((e) => {
@@ -34,18 +46,21 @@ export default function HomePage() {
       {/* Categories */}
       <section className="px-4">
         <div className="grid grid-cols-4 gap-3 sm:grid-cols-8">
-          {categories.map((cat) => (
+          {categories.map((cat) => {
+            const { icon: Icon, color } = categoryIcons[cat.id] || {};
+            return (
             <Link
               key={cat.id}
               href={`/events?category=${cat.id}`}
               className="flex flex-col items-center gap-1.5 rounded-xl p-2 transition hover:bg-zinc-800"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 text-xl ring-1 ring-zinc-700">
-                {cat.icon}
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 ring-1 ring-zinc-700">
+                {Icon && <Icon className={`h-5 w-5 ${color}`} />}
               </span>
               <span className="text-xs font-medium text-zinc-300">{cat.name}</span>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -61,13 +76,7 @@ export default function HomePage() {
               Xem tất cả <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-            {trending.map((event) => (
-              <div key={event.id} className="min-w-[260px] sm:min-w-[300px]">
-                <EventCard event={event} />
-              </div>
-            ))}
-          </div>
+          <TrendingCarousel events={trending} />
         </section>
       )}
 
