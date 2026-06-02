@@ -22,8 +22,8 @@ export default function ProfilePage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 p-4">
       {/* Profile Card */}
-      <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-6">
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-r from-green-600/20 to-emerald-600/20" />
+      <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-emerald-600/10" />
         <div className="relative flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600 text-2xl font-bold text-white ring-4 ring-zinc-900">
             {user.name.charAt(0)}
