@@ -1,102 +1,80 @@
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
-import styles from "./page.module.css";
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import { Wifi, Calendar, MapPin, DoorOpen } from "lucide-react";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
+const mockEvents = [
+  { id: "1", name: "Đêm nhạc Sơn Tùng M-TP: Sky Tour 2026", date: "15/06/2026 19:00", venue: "Sân vận động Mỹ Đình", gates: ["Cổng A1", "Cổng A2", "Cổng B1", "Cổng B2"] },
+  { id: "2", name: "Festival Âm nhạc Quốc tế Hội An 2026", date: "20/07/2026 17:00", venue: "Phố cổ Hội An", gates: ["Cổng Chính", "Cổng Phụ"] },
+];
 
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
+export default function StaffHomePage() {
+  const [selectedEvent, setSelectedEvent] = useState("");
+  const [selectedGate, setSelectedGate] = useState("");
+  const event = mockEvents.find((e) => e.id === selectedEvent);
 
   return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
-};
-
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ThemeImage
-          className={styles.logo}
-          srcLight="turborepo-dark.svg"
-          srcDark="turborepo-light.svg"
-          alt="Turborepo logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://turborepo.dev/docs?utm_source"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <div className="flex min-h-screen flex-col items-center justify-center p-6">
+      <div className="w-full max-w-sm space-y-6">
+        {/* Header */}
+        <div className="text-center space-y-1">
+          <h1 className="text-2xl font-bold text-emerald-400">VENTIX Staff</h1>
+          <div className="flex items-center justify-center gap-1.5 text-xs text-green-400">
+            <Wifi className="h-3 w-3" /> Online
+          </div>
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://turborepo.dev?utm_source=create-turbo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to turborepo.dev →
-        </a>
-      </footer>
+
+        {/* Select Event */}
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-zinc-300">Chọn sự kiện</label>
+          <select
+            value={selectedEvent}
+            onChange={(e) => { setSelectedEvent(e.target.value); setSelectedGate(""); }}
+            className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+          >
+            <option value="">-- Chọn sự kiện --</option>
+            {mockEvents.map((ev) => (
+              <option key={ev.id} value={ev.id}>{ev.name}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Event info */}
+        {event && (
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-3 space-y-1 text-xs text-zinc-400">
+            <p className="flex items-center gap-1.5"><Calendar className="h-3 w-3" />{event.date}</p>
+            <p className="flex items-center gap-1.5"><MapPin className="h-3 w-3" />{event.venue}</p>
+          </div>
+        )}
+
+        {/* Select Gate */}
+        {event && (
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-zinc-300">Chọn cổng check-in</label>
+            <div className="grid grid-cols-2 gap-2">
+              {event.gates.map((gate) => (
+                <button
+                  key={gate}
+                  onClick={() => setSelectedGate(gate)}
+                  className={`flex items-center justify-center gap-2 rounded-lg border p-3 text-sm font-medium transition ${selectedGate === gate ? "border-emerald-500 bg-emerald-500/20 text-emerald-400" : "border-zinc-700 bg-zinc-800 text-zinc-400 hover:border-zinc-600"}`}
+                >
+                  <DoorOpen className="h-4 w-4" />{gate}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* CTA */}
+        {selectedEvent && selectedGate && (
+          <Link
+            href={`/scan?event=${selectedEvent}&gate=${selectedGate}`}
+            className="block w-full rounded-xl bg-emerald-600 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 hover:bg-emerald-500"
+          >
+            Bắt đầu Check-in
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

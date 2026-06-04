@@ -41,18 +41,27 @@
 | STT | Tên màn hình | Đường dẫn |
 |-----|-------------|-----------|
 | 18 | Dashboard Organizer | `http://localhost:3002/` |
+| 19 | Quản lý sự kiện | `http://localhost:3002/events` |
+| 20 | Quản lý Merchandise | `http://localhost:3002/merchandise` |
+| 21 | Báo cáo & Thống kê | `http://localhost:3002/reports` |
 
 ### 2.4. STAFF
 
 | STT | Tên màn hình | Đường dẫn |
 |-----|-------------|-----------|
-| 19 | Trang chính Staff | `http://localhost:3003/` |
+| 22 | Chọn sự kiện & Cổng | `http://localhost:3003/` |
+| 23 | Quét QR / Check-in | `http://localhost:3003/scan` |
+| 24 | Nhật ký check-in | `http://localhost:3003/log` |
 
 ### 2.5. ADMIN
 
 | STT | Tên màn hình | Đường dẫn |
 |-----|-------------|-----------|
-| 20 | Dashboard Admin | `http://localhost:3004/` |
+| 25 | Dashboard Admin | `http://localhost:3004/` |
+| 26 | Phê duyệt Organizer | `http://localhost:3004/organizers` |
+| 27 | Phê duyệt Sự kiện | `http://localhost:3004/events` |
+| 28 | Quản lý User | `http://localhost:3004/users` |
+| 29 | Quản lý Refund | `http://localhost:3004/refunds` |
 
 ## 3. Hướng dẫn chạy
 
@@ -224,26 +233,107 @@ Các app chạy trên:
 
 ### 4.18. Dashboard Organizer
 
-- **Mô tả:** Trang tổng quan ban tổ chức
-- **Trạng thái:** Boilerplate Next.js
+- **Mô tả:** Tổng quan doanh thu, vé bán, check-in, merchandise
+- **Thành phần:** Sidebar navigation, KPI cards (Doanh thu, Vé bán, Check-in, Merch), Biểu đồ doanh thu 7 ngày, Bảng sự kiện sắp diễn ra
 
 <!-- Chèn ảnh chụp màn hình tại đây -->
 
 ---
 
-### 4.19. Trang chính Staff
+### 4.19. Quản lý sự kiện (Organizer)
 
-- **Mô tả:** Trang chính nhân viên soát vé
-- **Trạng thái:** Boilerplate Next.js
+- **Mô tả:** Danh sách sự kiện với trạng thái, tìm kiếm, tạo mới
+- **Thành phần:** Header + nút Tạo sự kiện, Search, Event cards (tên, trạng thái, ngày, địa điểm, progress vé bán)
 
 <!-- Chèn ảnh chụp màn hình tại đây -->
 
 ---
 
-### 4.20. Dashboard Admin
+### 4.20. Quản lý Merchandise (Organizer)
 
-- **Mô tả:** Trang quản trị hệ thống
-- **Trạng thái:** Boilerplate Next.js
+- **Mô tả:** Bảng sản phẩm merchandise với tồn kho
+- **Thành phần:** Header + nút Thêm, Search, Table (sản phẩm, sự kiện, giá, tồn kho, đã bán)
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.21. Báo cáo & Thống kê (Organizer)
+
+- **Mô tả:** Thống kê doanh thu, vé, check-in theo thời gian
+- **Thành phần:** KPI summary, Biểu đồ doanh thu theo tháng, Bảng chi tiết theo sự kiện, Nút xuất báo cáo
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.22. Chọn sự kiện & Cổng (Staff)
+
+- **Mô tả:** Trang chọn sự kiện và cổng check-in trước khi bắt đầu quét
+- **Thành phần:** Logo + trạng thái Online, Dropdown chọn sự kiện, Info sự kiện, Grid nút chọn cổng, CTA "Bắt đầu Check-in"
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.23. Quét QR / Check-in (Staff)
+
+- **Mô tả:** Màn hình camera quét QR với kết quả overlay (xanh/đỏ)
+- **Thành phần:** Header (sự kiện, cổng, online status), Camera viewfinder + QR frame, Progress bar check-in, Kết quả overlay full-screen (auto-dismiss 3s)
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.24. Nhật ký check-in (Staff)
+
+- **Mô tả:** Lịch sử các lần quét QR
+- **Thành phần:** Header, Danh sách entries (icon thành công/thất bại, tên, vé, thời gian, lý do lỗi)
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.25. Dashboard Admin
+
+- **Mô tả:** Tổng quan hệ thống: KPI, cảnh báo cần xử lý, health monitoring
+- **Thành phần:** Sidebar, KPI cards (Doanh thu, Giao dịch, Sự kiện, User), Alert list (chờ duyệt, refund), System health (service status + latency)
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.26. Phê duyệt Organizer (Admin)
+
+- **Mô tả:** Danh sách organizer chờ duyệt với thông tin MST, đại diện
+- **Thành phần:** Header, Organizer cards (tên công ty, MST, đại diện, email, SĐT, trạng thái, nút Phê duyệt/Từ chối)
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.27. Phê duyệt Sự kiện (Admin)
+
+- **Mô tả:** Danh sách sự kiện chờ duyệt với chi tiết
+- **Thành phần:** Header, Event cards (tên, organizer, ngày, địa điểm, thể loại, số ghế, 3 nút: Phê duyệt/Yêu cầu bổ sung/Từ chối)
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.28. Quản lý User (Admin)
+
+- **Mô tả:** Bảng danh sách tất cả user hệ thống
+- **Thành phần:** Header, Search, Table (tên, email, role badge, trạng thái Active/Banned, ngày tham gia, số đơn hàng)
+
+<!-- Chèn ảnh chụp màn hình tại đây -->
+
+---
+
+### 4.29. Quản lý Refund (Admin)
+
+- **Mô tả:** Danh sách yêu cầu hoàn tiền chờ xử lý
+- **Thành phần:** Header, Refund cards (mã, trạng thái, số tiền, user, vé, lý do, ngày, nút Chấp nhận/Từ chối)
 
 <!-- Chèn ảnh chụp màn hình tại đây -->
 
